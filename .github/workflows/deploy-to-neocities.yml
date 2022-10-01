@@ -29,5 +29,5 @@ jobs:
       uses: bcomnes/deploy-to-neocities@v1.1.9
       with:
         api_token: ${{ secrets.NEOCITIES_API_TOKEN }}
-        cleanup: true
-        dist_dir: visuals
+        cleanup: false
+        dist_dir: .
