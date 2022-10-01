@@ -20,8 +20,6 @@ jobs:
     # This example uses a Node.js toolchain to build a site
     - name: Use Node.js
       uses: actions/setup-node@v1
-      with:
-        node-version: latest
     - name: Install deps and build
       run: |
         npm i
