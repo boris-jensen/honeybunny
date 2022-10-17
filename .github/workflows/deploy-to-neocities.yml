@@ -15,10 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+
     - name: Move files to dist dir
       run: |
         mkdir dist
         cp index.html dist
+
     - name: Deploy to neocities
       uses: bcomnes/deploy-to-neocities@v1.1.10
       with:
