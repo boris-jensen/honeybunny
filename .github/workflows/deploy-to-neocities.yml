@@ -22,6 +22,7 @@ jobs:
       run: |
         mkdir dist
         cp index.html dist
+        cp not_found.html dist
 
     - name: Deploy to neocities
       uses: bcomnes/deploy-to-neocities@v1.1.10
