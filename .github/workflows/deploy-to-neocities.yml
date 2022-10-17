@@ -21,7 +21,8 @@ jobs:
     - name: Move files to dist dir
       run: |
         mkdir dist
-        cp -r src/ dist/
+        cp index.html dist
+        cp not_found.html dist
 
     - name: Deploy to neocities
       uses: bcomnes/deploy-to-neocities@v1.1.10
