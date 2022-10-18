@@ -10,7 +10,7 @@ const LIMITS = {
 const DEFAULTS = {
   INITIAL_LENGTH: 100,
   INITIAL_PARTS: 18,
-  INITIAL_MAIN_TURN: 20,
+  MAIN_TURN: 20,
   MAIN_FACTOR: 90,
   SIDE_TURN: 50,
   SIDE_FACTOR: 40,
@@ -20,7 +20,7 @@ function initialConfig() {
   return {
     initialLength: DEFAULTS.INITIAL_LENGTH,
     initialParts: DEFAULTS.INITIAL_PARTS,
-    initialMainTurn: DEFAULTS.INITIAL_MAIN_TURN,
+    mainTurn: DEFAULTS.MAIN_TURN,
     mainFactor: DEFAULTS.MAIN_FACTOR,
     sideTurn: DEFAULTS.SIDE_TURN,
     sideFactor: DEFAULTS.SIDE_FACTOR,
@@ -35,7 +35,7 @@ function resetConfig() {
 
 function getInitialLength() { return config.initialLength }
 function getInitialParts() { return config.initialParts }
-function getInitialMainTurn() { return (config.initialMainTurn / 500) * (Math.PI / 2) }
+function getMainTurn() { return (config.mainTurn / 500) * (Math.PI / 2) }
 function getMainFactor() { return config.mainFactor / 100 }
 function getSideTurn() { return (config.sideTurn / 100) * (Math.PI / 2) }
 function getSideFactor() { return config.sideFactor / 100 }
@@ -43,7 +43,7 @@ function getSideFactor() { return config.sideFactor / 100 }
 function hookupConfig() {
   hookupConfigElement("length-input", "length-value", "initialLength", "LENGTH")
   hookupConfigElement("parts-input", "parts-value", "initialParts", "PARTS")
-  hookupConfigElement("mainturn-input", "mainturn-value", "initialMainTurn", "MAIN_TURN")
+  hookupConfigElement("mainturn-input", "mainturn-value", "mainTurn", "MAIN_TURN")
   hookupConfigElement("mainfactor-input", "mainfactor-value", "mainFactor", "MAIN_FACTOR")
   hookupConfigElement("sideturn-input", "sideturn-value", "sideTurn", "SIDE_TURN")
   hookupConfigElement("sidefactor-input", "sidefactor-value", "sideFactor", "SIDE_FACTOR")
