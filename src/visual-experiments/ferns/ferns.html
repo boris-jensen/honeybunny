@@ -4,62 +4,65 @@
     <meta charset="utf-8">
     <title>title</title>
     <link rel="stylesheet" href="../visual-experiments.css">
+    <link rel="stylesheet" href="ferns.css">
     <script src="fernConfig.js"></script>
     <script src="ferns.js"></script>
   </head>
   <body onload="hookupConfig(); paintFern()">
-    <div>
-      <div>
-        <div class="slidecontainer">
-          <input type="range" class="slider" id="length-input">
+    <div class="mainWrapper">
+      <div class="slidersWrapper">
+        <div>
+          <div class="slidecontainer">
+            <input type="range" class="slider" id="length-input">
+          </div>
+          <div>
+            LENGTH: <span id="length-value"></span>
+          </div>
         </div>
         <div>
-          LENGTH: <span id="length-value"></span>
-        </div>
-      </div>
-      <div>
-        <div class="slidecontainer">
-          <input type="range" class="slider" id="parts-input">
-        </div>
-        <div>
-          PARTS: <span id="parts-value"></span>
-        </div>
-      </div>
-      <div>
-        <div class="slidecontainer">
-          <input type="range" class="slider" id="mainturn-input">
+          <div class="slidecontainer">
+            <input type="range" class="slider" id="parts-input">
+          </div>
+          <div>
+            PARTS: <span id="parts-value"></span>
+          </div>
         </div>
         <div>
-          MAINTURN: <span id="mainturn-value"></span>
-        </div>
-      </div>
-      <div>
-        <div class="slidecontainer">
-          <input type="range" class="slider" id="mainfactor-input">
-        </div>
-        <div>
-          MAINFACTOR: <span id="mainfactor-value"></span>
-        </div>
-      </div>
-      <div>
-        <div class="slidecontainer">
-          <input type="range" class="slider" id="sideturn-input">
+          <div class="slidecontainer">
+            <input type="range" class="slider" id="mainturn-input">
+          </div>
+          <div>
+            MAINTURN: <span id="mainturn-value"></span>
+          </div>
         </div>
         <div>
-          SIDETURN: <span id="sideturn-value"></span>
-        </div>
-      </div>
-      <div>
-        <div class="slidecontainer">
-          <input type="range" class="slider" id="sidefactor-input">
+          <div class="slidecontainer">
+            <input type="range" class="slider" id="mainfactor-input">
+          </div>
+          <div>
+            MAINFACTOR: <span id="mainfactor-value"></span>
+          </div>
         </div>
         <div>
-          SIDEFACTOR: <span id="sidefactor-value"></span>
+          <div class="slidecontainer">
+            <input type="range" class="slider" id="sideturn-input">
+          </div>
+          <div>
+            SIDETURN: <span id="sideturn-value"></span>
+          </div>
+        </div>
+        <div>
+          <div class="slidecontainer">
+            <input type="range" class="slider" id="sidefactor-input">
+          </div>
+          <div>
+            SIDEFACTOR: <span id="sidefactor-value"></span>
+          </div>
         </div>
       </div>
-    </div>
-    <div>
-      <canvas id="main-canvas" width="1000" height="1000"></canvas>
+      <div class="canvasWrapper">
+        <canvas id="main-canvas" width="1000" height="1000"></canvas>
+      </div>
     </div>
   </body>
 </html>
