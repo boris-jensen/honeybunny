@@ -55,11 +55,6 @@ function hookupConfigElement(inputId, valueId, configField, limitsField) {
   const initialValue = config[configField]
   const inputLimits = LIMITS[limitsField]
 
-  console.log(inputId, valueId, configField, limitsField)
-  console.log(input)
-  console.log(value)
-  console.log(initialValue, inputLimits)
-
   input.setAttribute("min", inputLimits.MIN)
   input.setAttribute("max", inputLimits.MAX)
   input.value = initialValue
