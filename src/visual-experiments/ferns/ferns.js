@@ -17,6 +17,23 @@ function line(from, angle, length, ctx) {
   return to
 }
 
+function byteToHex(byte) {
+  if (byte < 16) {
+    return '0' + byte.toString(16)
+  } else {
+    return byte.toString(16)
+  }
+}
+
+function toColor(color) {
+  const colorShare = 255 * (color / 100)
+  const red = Math.round(255 - colorShare)
+  const green = Math.round(colorShare)
+
+  return '#' + byteToHex(red) + byteToHex(green) + '00'
+}
+
+
 const maxGeneration = 11
 
 function fern(from, angle, length, parts, turnRight, generation, ctx) {
@@ -50,7 +67,9 @@ function paintFern() {
   ctx.beginPath()
   const initialPoint = new Point(canvas.width / 3, canvas.height)
   const initialAngle = 3 * Math.PI / 2
+  ctx.strokeStyle = toColor(getColor())
 
   fern(initialPoint, initialAngle, getInitialLength(), getInitialParts(), true, 0, ctx)
+
   ctx.stroke()
 }
