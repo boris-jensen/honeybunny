@@ -1,6 +1,6 @@
 const LIMITS = {
   LENGTH: { MAX: 200, MIN: 10 },
-  PARTS: { MAX: 25, MIN: 1 },
+  PARTS: { MAX: 18, MIN: 1 },
   MAIN_TURN: { MAX: 100, MIN: 0 },
   MAIN_FACTOR: { MAX: 100, MIN: 0 },
   SIDE_TURN: { MAX: 100, MIN: 0 },
@@ -10,7 +10,7 @@ const LIMITS = {
 
 const DEFAULTS = {
   INITIAL_LENGTH: 100,
-  INITIAL_PARTS: 18,
+  INITIAL_PARTS: 12,
   MAIN_TURN: 20,
   MAIN_FACTOR: 90,
   SIDE_TURN: 50,

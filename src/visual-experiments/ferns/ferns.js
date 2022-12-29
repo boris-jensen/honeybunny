@@ -34,10 +34,8 @@ function toColor(color) {
 }
 
 
-const maxGeneration = 11
-
-function fern(from, angle, length, parts, turnRight, generation, ctx) {
-  if (parts < 1 || length < 1 || generation > maxGeneration) {
+function fern(from, angle, length, parts, turnRight, ctx) {
+  if (parts < 1 || length < 1) {
     return
   } else {
     ctx.moveTo(from.x, from.y)
@@ -45,7 +43,6 @@ function fern(from, angle, length, parts, turnRight, generation, ctx) {
     const mainFactor = getMainFactor()
     const sideTurn = turnRight ? getSideTurn() : -getSideTurn()
     const sideFactor = getSideFactor()
-    const newGeneration = generation + 1
 
     const bendPoint = line(from, angle, length, ctx)
     const bendAngle = angle + mainTurn
@@ -54,9 +51,9 @@ function fern(from, angle, length, parts, turnRight, generation, ctx) {
     const newAngle = bendAngle + mainTurn
     const newLength = bendLength * mainFactor
     
-    fern(newFrom, newAngle,            newLength,              parts - 1,  turnRight, newGeneration, ctx)
-    fern(newFrom, newAngle + sideTurn, newLength * sideFactor, parts - 1, !turnRight, newGeneration, ctx)
-    fern(newFrom, newAngle - sideTurn, newLength * sideFactor, parts - 1,  turnRight, newGeneration, ctx)
+    fern(newFrom, newAngle,            newLength,              parts - 1,  turnRight, ctx)
+    fern(newFrom, newAngle + sideTurn, newLength * sideFactor, parts - 1, !turnRight, ctx)
+    fern(newFrom, newAngle - sideTurn, newLength * sideFactor, parts - 1,  turnRight, ctx)
   }
 }
 
@@ -69,7 +66,7 @@ function paintFern() {
   const initialAngle = 3 * Math.PI / 2
   ctx.strokeStyle = toColor(getColor())
 
-  fern(initialPoint, initialAngle, getInitialLength(), getInitialParts(), true, 0, ctx)
+  fern(initialPoint, initialAngle, getInitialLength(), getInitialParts(), true, ctx)
 
   ctx.stroke()
 }
