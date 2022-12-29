@@ -17,8 +17,8 @@ function line(from, angle, length, ctx) {
   return to
 }
 
-function fern(from, angle, length, parts, turnRight, ctx) {
-  if (parts < 1 || length < 1) {
+function fern(from, angle, length, parts, turnRight, generation, ctx) {
+  if (parts < 1 || length < 1 || generation > 11) {
     return
   } else {
     ctx.moveTo(from.x, from.y)
@@ -26,6 +26,7 @@ function fern(from, angle, length, parts, turnRight, ctx) {
     const mainFactor = getMainFactor()
     const sideTurn = turnRight ? getSideTurn() : -getSideTurn()
     const sideFactor = getSideFactor()
+    const newGeneration = generation + 1
 
     const bendPoint = line(from, angle, length, ctx)
     const bendAngle = angle + mainTurn
@@ -34,9 +35,9 @@ function fern(from, angle, length, parts, turnRight, ctx) {
     const newAngle = bendAngle + mainTurn
     const newLength = bendLength * mainFactor
 
-    fern(newFrom, newAngle,            newLength,              parts - 1,  turnRight, ctx)
-    fern(newFrom, newAngle + sideTurn, newLength * sideFactor, parts - 1, !turnRight, ctx)
-    fern(newFrom, newAngle - sideTurn, newLength * sideFactor, parts - 1,  turnRight, ctx)
+    fern(newFrom, newAngle,            newLength,              parts - 1,  turnRight, newGeneration, ctx)
+    fern(newFrom, newAngle + sideTurn, newLength * sideFactor, parts - 1, !turnRight, newGeneration, ctx)
+    fern(newFrom, newAngle - sideTurn, newLength * sideFactor, parts - 1,  turnRight, newGeneration, ctx)
   }
 }
 
@@ -48,6 +49,6 @@ function paintFern() {
   const initialPoint = new Point(canvas.width / 3, canvas.height)
   const initialAngle = 3 * Math.PI / 2
 
-  fern(initialPoint, initialAngle, getInitialLength(), getInitialParts(), true, ctx)
+  fern(initialPoint, initialAngle, getInitialLength(), getInitialParts(), true, 0, ctx)
   ctx.stroke()
 }
