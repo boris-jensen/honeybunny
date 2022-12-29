@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <link rel="stylesheet" href="../visual-experiments.css">
+    <link rel="stylesheet" href="sierpinski.css">
+    <script src="sierpinskiConfig.js"></script>
+    <script src="sierpinski.js"></script>
+  </head>
+  <body onload="hookupConfig(); paintSierpinski()">
+    <div class="mainWrapper">
+      <div class="slidersWrapper">
+        <div>
+          <div class="slidecontainer">
+            <input type="range" class="slider" id="dots-input">
+          </div>
+          <div>
+            DOTS: <span id="dots-value"></span>
+          </div>
+        </div>
+        <div>
+          <div class="slidecontainer">
+            <input type="range" class="slider" id="speed-input">
+          </div>
+          <div>
+            SPEED: <span id="speed-value"></span>
+          </div>
+        </div>
+        <div>
+            <div class="slidecontainer">
+              <input type="range" class="slider" id="color-input">
+            </div>
+            <div>
+              COLOR: <span id="color-value"></span>
+            </div>
+          </div>  
+        <div>
+          <button id="reset-button" onclick="reset">RESET!</button>
+        </div>  
+      </div>
+      <div class="canvasWrapper">
+        <canvas id="main-canvas" width="1000" height="1000"></canvas>
+      </div>
+    </div>
+  </body>
+</html>
