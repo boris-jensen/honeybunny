@@ -17,8 +17,10 @@ function line(from, angle, length, ctx) {
   return to
 }
 
+const maxGeneration = 11
+
 function fern(from, angle, length, parts, turnRight, generation, ctx) {
-  if (parts < 1 || length < 1 || generation > 11) {
+  if (parts < 1 || length < 1 || generation > maxGeneration) {
     return
   } else {
     ctx.moveTo(from.x, from.y)
@@ -34,7 +36,7 @@ function fern(from, angle, length, parts, turnRight, generation, ctx) {
     const newFrom = line(bendPoint, bendAngle, bendLength, ctx)
     const newAngle = bendAngle + mainTurn
     const newLength = bendLength * mainFactor
-
+    
     fern(newFrom, newAngle,            newLength,              parts - 1,  turnRight, newGeneration, ctx)
     fern(newFrom, newAngle + sideTurn, newLength * sideFactor, parts - 1, !turnRight, newGeneration, ctx)
     fern(newFrom, newAngle - sideTurn, newLength * sideFactor, parts - 1,  turnRight, newGeneration, ctx)
