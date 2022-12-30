@@ -12,32 +12,37 @@
     <div class="mainWrapper">
       <div class="slidersWrapper">
         <div>
-          <div class="slidecontainer">
-            <input type="range" class="slider" id="dots-input">
-          </div>
           <div>
             DOTS: <span id="dots-value"></span>
           </div>
+          <div class="slidecontainer">
+            <input type="range" class="slider" id="dots-input">
+          </div>
         </div>
         <div>
-          <div class="slidecontainer">
-            <input type="range" class="slider" id="speed-input">
-          </div>
           <div>
             SPEED: <span id="speed-value"></span>
           </div>
+          <div class="slidecontainer">
+            <input type="range" class="slider" id="speed-input">
+          </div>
         </div>
         <div>
-            <div class="slidecontainer">
-              <input type="range" class="slider" id="color-input">
-            </div>
-            <div>
-              COLOR: <span id="color-value"></span>
-            </div>
-          </div>  
+          <div>
+            COLOR: <span id="color-value"></span>
+          </div>
+          <div class="slidecontainer">
+            <input type="range" class="slider" id="color-input">
+          </div>
+        </div>
         <div>
-          <button id="reset-button" onclick="reset">RESET!</button>
-        </div>  
+          <div>
+            CORNER:
+          </div>
+          <div>
+            <input type="radio" id="corner-input">
+          </div>
+        </div>
       </div>
       <div class="canvasWrapper">
         <canvas id="main-canvas" width="1000" height="1000"></canvas>
