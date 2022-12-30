@@ -4,13 +4,32 @@ function drawPoint(point, ctx) {
   ctx.fillRect(x, y, 1, 1)
 }
 
-function drawCorner(point, ctx) {
+function drawCorners(ctx) {
+  drawCorner(config.corners.pointA, "#FF0000", ctx)
+  drawCorner(config.corners.pointB, "#00FF00", ctx)
+  drawCorner(config.corners.pointC, "#0000FF", ctx)
+}
+
+function drawCorner(point, color, ctx) {
   const x = Math.round(point.x)
   const y = Math.round(point.y)
   const side = 6
   const halfSide = side / 2
 
+  ctx.fillStyle = color
   ctx.fillRect(x - halfSide, y - halfSide, side, side)
+  ctx.stroke()
+}
+
+function drawPoints(ctx) {
+  let current = selectCorner()
+  
+  ctx.fillStyle = "#000000"
+  for (let i = 0; i < getDots(); i++) {
+    current = midwayPoint(current, selectCorner())
+    drawPoint(current, ctx)
+  }
+  ctx.stroke()
 }
 
 function midwayPoint(p1, p2) {
@@ -33,18 +52,6 @@ function paintSierpinski() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath()
 
-  ctx.fillStyle = "#FF0000"
-  console.log(ctx.strokeStyle)
-  drawCorner(config.corners.pointA, ctx)
-  drawCorner(config.corners.pointB, ctx)
-  drawCorner(config.corners.pointC, ctx)
-  ctx.stroke()
-
-  ctx.fillStyle = "#000000"
-  let current = selectCorner()
-  for (let i = 0; i < getDots(); i++) {
-    current = midwayPoint(current, selectCorner())
-    drawPoint(current, ctx)
-  }
-  ctx.stroke()
+  drawCorners(ctx)
+  drawPoints(ctx)
 }

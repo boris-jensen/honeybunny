@@ -8,7 +8,7 @@
     <script src="sierpinskiConfig.js"></script>
     <script src="sierpinski.js"></script>
   </head>
-  <body onload="hookupConfig(); paintSierpinski()">
+  <body onload="hookupControls(); hookupClickHandling(); paintSierpinski()">
     <div class="mainWrapper">
       <div class="slidersWrapper">
         <div>
@@ -21,26 +21,15 @@
         </div>
         <div>
           <div>
-            SPEED: <span id="speed-value"></span>
-          </div>
-          <div class="slidecontainer">
-            <input type="range" class="slider" id="speed-input">
-          </div>
-        </div>
-        <div>
-          <div>
-            COLOR: <span id="color-value"></span>
-          </div>
-          <div class="slidecontainer">
-            <input type="range" class="slider" id="color-input">
-          </div>
-        </div>
-        <div>
-          <div>
-            CORNER:
+            POINT & CLICK:
           </div>
           <div>
-            <input type="radio" id="corner-input">
+            <input type="radio" id="set-corner-a" name="click-functionality-input" value="A" checked="true">
+            <label for="set-corner-a" style="color: red;">A</label>
+            <input type="radio" id="set-corner-b" name="click-functionality-input" value="B">
+            <label for="set-corner-b" style="color: green;">B</label>
+            <input type="radio" id="set-corner-c" name="click-functionality-input" value="C">
+            <label for="set-corner-c" style="color: blue;">C</label>
           </div>
         </div>
       </div>
