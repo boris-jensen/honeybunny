@@ -5,7 +5,7 @@ function paintSierpinski() {
   ctx.beginPath()
 
   drawCorners(ctx)
-  drawPoints(ctx)
+  drawPoints(canvas, ctx)
 }
 
 // draw corners
@@ -29,21 +29,29 @@ function drawCorner(point, color, ctx) {
 
 // draw points
 
+function drawPoints(canvas, ctx) {
+  let current = selectCorner()
+  
+  ctx.fillStyle = "#000000"
+  let i = 0
+  while (i < getDots()) {
+    current = midwayPoint(current, selectCorner())
+    if (pointIsVisible(current, canvas)) {
+      drawPoint(current, ctx)
+      i++
+    }
+  }
+  ctx.stroke()
+}
+
+function pointIsVisible(point, canvas) {
+  return point.x < canvas.width && point.x > 0 && point.y < canvas.height && point.y > 0
+}
+
 function drawPoint(point, ctx) {
   const x = Math.round(point.x)
   const y = Math.round(point.y)
   ctx.fillRect(x, y, 1, 1)
-}
-
-function drawPoints(ctx) {
-  let current = selectCorner()
-  
-  ctx.fillStyle = "#000000"
-  for (let i = 0; i < getDots(); i++) {
-    current = midwayPoint(current, selectCorner())
-    drawPoint(current, ctx)
-  }
-  ctx.stroke()
 }
 
 function midwayPoint(p1, p2) {
