@@ -78,7 +78,7 @@ function handleClickFunctionChange(event) {
 
 function hookupClickHandling() {
   const canvas = document.getElementById('main-canvas')
-  canvas.onmousedown = function(event) { config.mouseDown = true; handleClickFunctionChange(event)}
+  canvas.onmousedown = function(event) { config.mouseDown = true; handleMouseClickAndDrag(event)}
   canvas.onmouseup = function() { config.mouseDown = false}
   canvas.onmousemove = handleMouseClickAndDrag
 }
