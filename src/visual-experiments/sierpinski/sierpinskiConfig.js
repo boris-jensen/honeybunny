@@ -74,8 +74,6 @@ function handleClickFunctionChange(event) {
   } else {
     config.functionality = CLICK_FUNCTIONALITY.moveCornerC
   }
-
-  console.log(config.functionality)
 }
 
 function hookupClickHandling() {
@@ -97,7 +95,5 @@ function handleMouseClickAndDrag(event) {
   } else if (config.functionality == CLICK_FUNCTIONALITY.moveCornerC) {
     config.corners.pointC = point
   }
-
-  console.log(point)
   paintSierpinski()
 }
