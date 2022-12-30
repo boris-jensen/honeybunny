@@ -1,8 +1,14 @@
-function drawPoint(point, ctx) {
-  const x = Math.round(point.x)
-  const y = Math.round(point.y)
-  ctx.fillRect(x, y, 1, 1)
+function paintSierpinski() {
+  const canvas = document.getElementById('main-canvas')
+  const ctx = canvas.getContext('2d')
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath()
+
+  drawCorners(ctx)
+  drawPoints(ctx)
 }
+
+// draw corners
 
 function drawCorners(ctx) {
   drawCorner(config.corners.pointA, "#FF0000", ctx)
@@ -19,6 +25,15 @@ function drawCorner(point, color, ctx) {
   ctx.fillStyle = color
   ctx.fillRect(x - halfSide, y - halfSide, side, side)
   ctx.stroke()
+}
+
+
+// draw points
+
+function drawPoint(point, ctx) {
+  const x = Math.round(point.x)
+  const y = Math.round(point.y)
+  ctx.fillRect(x, y, 1, 1)
 }
 
 function drawPoints(ctx) {
@@ -44,14 +59,4 @@ function selectCorner() {
   if (idx == 0) return config.corners.pointA
   else if (idx == 1) return config.corners.pointB
   else return config.corners.pointC
-}
-
-function paintSierpinski() {
-  const canvas = document.getElementById('main-canvas')
-  const ctx = canvas.getContext('2d')
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.beginPath()
-
-  drawCorners(ctx)
-  drawPoints(ctx)
 }

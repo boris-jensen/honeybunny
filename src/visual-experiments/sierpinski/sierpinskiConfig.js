@@ -1,5 +1,5 @@
 const LIMITS = {
-  DOTS:    { MAX: 10000, MIN: 1 },
+  DOTS:    { MAX: 20000, MIN: 1 },
 }
 
 const DEFAULTS = {
