@@ -27,7 +27,6 @@ function drawCorner(point, color, ctx) {
   ctx.stroke()
 }
 
-
 // draw points
 
 function drawPoint(point, ctx) {
