@@ -27,7 +27,8 @@ function initialConfig() {
       pointA: new Point(500, 50),
       pointB: new Point(50, 800),
       pointC: new Point(950, 800),
-    }
+    },
+    mouseDown: false,
   }
 }
 
@@ -59,41 +60,43 @@ function hookupConfigElement(inputId, valueId, configField, limitsField) {
 
 function hookupFunctionalityButtons() {
   const inputs = document.getElementsByName("click-functionality-input")
-  console.log(inputs)
   for (let i = 0; i < inputs.length; i++) {
-    console.log(inputs[i])
     inputs[i].onchange = handleClickFunctionChange
   }
 }
 
 function handleClickFunctionChange(event) {
+  console.log(event.target)
   if (event.target.defaultValue == "A") {
     config.functionality = CLICK_FUNCTIONALITY.moveCornerA
   } else if (event.target.defaultValue == "B") {
     config.functionality = CLICK_FUNCTIONALITY.moveCornerB
-  } else {
+  } else if (event.target.defaultValue == "C") {
     config.functionality = CLICK_FUNCTIONALITY.moveCornerC
   }
 }
 
 function hookupClickHandling() {
   const canvas = document.getElementById('main-canvas')
-  canvas.addEventListener("click", handleMouseClickAndDrag)
-  canvas.addEventListener("dragover", handleMouseClickAndDrag)
+  canvas.onmousedown = function(event) { config.mouseDown = true; handleClickFunctionChange(event)}
+  canvas.onmouseup = function() { config.mouseDown = false}
+  canvas.onmousemove = handleMouseClickAndDrag
 }
 
 function handleMouseClickAndDrag(event) {
-  const canvas = document.getElementById('main-canvas')
-  const rect = canvas.getBoundingClientRect()
-  const eventX = event.clientX - rect.left
-  const eventY = event.clientY - rect.top
-  const point = new Point(eventX, eventY)
-  if (config.functionality == CLICK_FUNCTIONALITY.moveCornerA) {
-    config.corners.pointA = point
-  } else if (config.functionality == CLICK_FUNCTIONALITY.moveCornerB) {
-    config.corners.pointB = point
-  } else if (config.functionality == CLICK_FUNCTIONALITY.moveCornerC) {
-    config.corners.pointC = point
+  if (config.mouseDown) {
+    const canvas = document.getElementById('main-canvas')
+    const rect = canvas.getBoundingClientRect()
+    const eventX = event.clientX - rect.left
+    const eventY = event.clientY - rect.top
+    const point = new Point(eventX, eventY)
+    if (config.functionality == CLICK_FUNCTIONALITY.moveCornerA) {
+      config.corners.pointA = point
+    } else if (config.functionality == CLICK_FUNCTIONALITY.moveCornerB) {
+      config.corners.pointB = point
+    } else if (config.functionality == CLICK_FUNCTIONALITY.moveCornerC) {
+      config.corners.pointC = point
+    }
+    paintSierpinski()
   }
-  paintSierpinski()
 }
