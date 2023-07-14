@@ -125,3 +125,21 @@ function handleMouseClickAndDrag(event) {
     paintSierpinski()
   }
 }
+
+function handleMouseClickAndDrag(event) {
+  if (config.mouseDown) {
+    const canvas = document.getElementById('main-canvas')
+    const rect = canvas.getBoundingClientRect()
+    const eventX = event.clientX - rect.left
+    const eventY = event.clientY - rect.top
+    const point = new Point(eventX, eventY)
+    if (config.functionality == CLICK_FUNCTIONALITY.moveCornerA) {
+      config.corners.pointA = point
+    } else if (config.functionality == CLICK_FUNCTIONALITY.moveCornerB) {
+      config.corners.pointB = point
+    } else if (config.functionality == CLICK_FUNCTIONALITY.moveCornerC) {
+      config.corners.pointC = point
+    }
+    paintSierpinski()
+  }
+}
