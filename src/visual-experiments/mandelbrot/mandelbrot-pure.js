@@ -25,20 +25,3 @@ function *genMandelSqrLengths(orig) {
         yield mandels.next().value.sqrLen()
     }
 }
-
-function mandelColor1(iters, maxIters) {
-    if (iters === maxIters) {
-        return { r: 0, g: 0, b: 0 }
-    } else {
-        return { r: 256, g: 0, b: 0}
-    }
-}
-
-function mandelColor2(iters, maxIters) {
-    if (iters === maxIters) {
-        return { r: 0, g: 0, b: 0 }
-    } else {
-        return { r: iters * 20 % 256, g: (iters * 10) % 256, b: (iters * 5) % 256}
-    }
-}
-

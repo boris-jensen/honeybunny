@@ -20,7 +20,7 @@ function drawBlack(ctx, canvasData, width, height) {
   updateCanvas(ctx, canvasData)
 }
 
-function drawMandel(centerX, centerY, diffX, diffY, width, height, maxIters, ctx, canvasData) {
+function drawMandel(centerX, centerY, diffX, diffY, width, height, maxIters, colorCache, ctx, canvasData) {
   drawBlack(ctx, canvasData, width, height)
 
   const minX = centerX - (diffX / 2)
@@ -32,7 +32,7 @@ function drawMandel(centerX, centerY, diffX, diffY, width, height, maxIters, ctx
           var mandelY = (cy / height) * diffY + minY
           var mandelCoord = new Complex(mandelX, mandelY)
           var mandelIters = getMandelIters(mandelCoord, maxIters)
-          var colors = mandelColor2(mandelIters, maxIters)
+          var colors = colorCache[mandelIters]
           drawPixel(cx, cy, colors.r, colors.g, colors.b, 255, width, canvasData)
       }
   }
@@ -51,6 +51,8 @@ function paintMandelbrot() {
 
   const maxIterations = 100
 
+  const colorCache = getColorCache(maxIterations)
+
   var centerX = -0.5
   var centerY = 0
   var diffX = 3.5
@@ -59,7 +61,7 @@ function paintMandelbrot() {
   const movePct = 0.2
   const zoomPct = 0.7
 
-  drawMandel(centerX, centerY, diffX, diffY, width, height, maxIterations, ctx, canvasData)
+  drawMandel(centerX, centerY, diffX, diffY, width, height, maxIterations, colorCache, ctx, canvasData)
 
   document.onkeydown = function (e) {
       switch (e.key) {
@@ -80,6 +82,6 @@ function paintMandelbrot() {
               diffY = diffY * zoomPct
               break
       }
-      drawMandel(centerX, centerY, diffX, diffY, width, height, maxIterations, ctx, canvasData)
+      drawMandel(centerX, centerY, diffX, diffY, width, height, maxIterations, colorCache, ctx, canvasData)
   };
 }
