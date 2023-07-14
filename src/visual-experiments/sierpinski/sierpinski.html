@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <link rel="stylesheet" href="../visual-experiments.css">
+    <link rel="stylesheet" href="sierpinski.css">
+    <script src="../point.js"></script>
+    <script src="sierpinskiConfig.js"></script>
+    <script src="sierpinski.js"></script>
+  </head>
+  <body onload="hookupControls(); hookupClickHandling(); paintSierpinski()">
+    <div class="mainWrapper">
+      <div class="slidersWrapper">
+        <div>
+          <div>
+            DOTS: <span id="dots-value"></span>
+          </div>
+          <div class="slidecontainer">
+            <input type="range" class="slider" id="dots-input">
+          </div>
+        </div>
+        <div>
+          <div>
+            POINT & CLICK:
+          </div>
+          <div>
+            <input type="radio" id="set-corner-a" name="click-functionality-input" value="A" checked="true">
+            <label for="set-corner-a" style="color: red;">A</label>
+            <input type="radio" id="set-corner-b" name="click-functionality-input" value="B">
+            <label for="set-corner-b" style="color: green;">B</label>
+            <input type="radio" id="set-corner-c" name="click-functionality-input" value="C">
+            <label for="set-corner-c" style="color: blue;">C</label>
+            <input type="radio" id="zoom" name="click-functionality-input" value="ZOOM">
+            <label for="zoom" style="color: black;">ZOOM</label>
+          </div>
+        </div>
+      </div>
+      <div class="canvasWrapper">
+        <canvas id="main-canvas" width="1000" height="1000"></canvas>
+      </div>
+    </div>
+  </body>
+</html>
