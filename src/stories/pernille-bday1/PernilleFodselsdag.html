@@ -11,11 +11,11 @@
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play PernilleFodselsdag.</tw-noscript></noscript></tw-story>
 <tw-storydata name="PernilleFodselsdag" startnode="1" creator="Twine" creator-version="2.3.15" ifid="45444063-7718-45E8-82B5-2094C5713774" zoom="1" format="Harlowe" format-version="3.2.3" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Randbøldal marked" tags="" position="538,140" size="100,100">(set: $løb to false)
 (set: $venner to false)
-Det er en dejlig eftermiddag på Randbøldal marked, og du går rundt og nyder det gode vejr og de søde fødselsdagsgæster. Men pludselig hører du en mærkelig lyd bag ved dig. Hvad gør du?
-
+Det er en dejlig eftermiddag på Randbøldal marked, og du går rundt og nyder det gode vejr og de søde fødselsdagsgæster. 
 
 &lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/farmer-market.jpeg&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;
 
+Men pludselig hører du en mærkelig lyd bag ved dig. Hvad gør du?
 
 [[Vender dig hurtigt om-&gt;HurtigVending]]
 
@@ -29,9 +29,11 @@ Det er en dejlig eftermiddag på Randbøldal marked, og du går rundt og nyder d
 [[Løber efter ind i folkemængden, for at få et bedre blik for sagen.-&gt;UndersøgerFolk]]
 
 [[Spørger dine venner, de må vide noget!-&gt;VennerHjælp]]</tw-passagedata><tw-passagedata pid="4" name="UndersøgerFolk" tags="" position="440,519" size="100,100">(set: $løb to true)
-Du løber ind blandt folk, for at se nærmere på det gule lyn. Du kaster dig rundt i mængden, møffer til folk, og du kan høre fornærmede udråb bag dig, men du ænser dem ikke, du er ét med jagten, og dit bytte skal ikke slippe væk. Du ser et gult glimt, men hvor drejede det hen, hurtigt, vælg!
+Du løber ind blandt folk, for at se nærmere på det gule lyn. Du kaster dig rundt i mængden, møffer til folk, og du kan høre fornærmede udråb bag dig, men du ænser dem ikke, du er ét med jagten, og dit bytte skal ikke slippe væk.
 
 &lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/chase.jpeg&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;
+
+Du ser et gult glimt, men hvor drejede det hen, hurtigt, vælg!
 
 [[Højre!-&gt;Højre]]
 
@@ -47,15 +49,13 @@ Du løber ind blandt folk, for at se nærmere på det gule lyn. Du kaster dig ru
 
 [[De forklarede mig det hele, nu forstår jeg alt, det står lysende klart for mig-&gt;Hmm1]]</tw-passagedata><tw-passagedata pid="6" name="Højre" tags="" position="289,670" size="100,100">Ak, du bumper ind i en godmodig landmand som siger, at han godt nok så noget gult, men det drejede til venstre, lige efter det var drejet til højre :( Du trasker tilbage til dine venner, de må vide noget.
 
-
-
 (if: not $venner)[[Spørg vennerne om hjælp-&gt;VennerHjælp]]
 
 (if: $venner)[[Årh, nej, dem var jeg jo lige henne ved, der var ingen gevinst. Hvad skal jeg dog gøre?-&gt;Tænke1]]</tw-passagedata><tw-passagedata pid="7" name="Venstre" tags="" position="440,669" size="100,100">Ak, du var lige ved at fange det, men så var det ligesom om det bare forsvandt ud i den blå luft. Du kan i hvert fald ikke finde det længere :( Du kigger op mod himlen, løfter en knyttet næve og lover, at du ikke helmer, før verden er tilbage i sin vante gænge igen, hvor gule himstregimser ikke bare sådan forstyrrer freden. Hvad med dine venner, ved de noget, tror du?
 
 (if: not $venner)[[Jeg spørger mine venner-&gt;VennerHjælp]]
 
-(if: $venner)[[Nej, jeg har spurgt dem, og de anede intet :( Hvad kan jeg så gøre?-&gt;Tænke1]]</tw-passagedata><tw-passagedata pid="8" name="Snørklet" tags="" position="589,668" size="100,100">Ok, det var faktisk imponerende. Du holder dig tæt på sporet af den gule bandit, men lige som du tror at du når hen til den, så drejer du om en gruppe af glade markedsgæster, og så, pist, så er den bare væk :O Det har du alligevel aldrig oplevet før. Dine detektivevner kommer virkelig på en prøve her, kan du godt mærke. Det er godt at mærke jagtens rus, og endelig møde en modpart der kan give dig en udfordring. Hvad er næste skridt?
+(if: $venner)[[Nej, jeg har spurgt dem, og de anede intet :( Hvad kan jeg så gøre?-&gt;Tænke1]]</tw-passagedata><tw-passagedata pid="8" name="Snørklet" tags="" position="589,668" size="100,100">Ok, det var faktisk imponerende. Du holder dig tæt på sporet af den gule bandit, men lige som du tror at du når hen til den, så drejer du om en gruppe af glade markedsgæster, og så, pist, så er den bare væk :O Det har du alligevel aldrig oplevet før. Dine detektivevner kommer virkelig på en prøve her, kan du godt mærke. Det er godt at mærke jagtens rus, og endelig møde en modpart der kan give dig en udfordring. Men hvad er næste skridt?
 
 (if: not $venner)[[Hmm, jeg kan tale med mine venner, måske så de noget?-&gt;VennerHjælp]]
 
@@ -73,18 +73,19 @@ Du løber ind blandt folk, for at se nærmere på det gule lyn. Du kaster dig ru
 
 &lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/thinking.jpeg&quot; width=&quot;600&quot; height=&quot;500&quot;&gt;
 
-[[Er det...?-&gt;Kat]]</tw-passagedata><tw-passagedata pid="12" name="Hmm2" tags="" position="973,829" size="100,100">Nej, det gjorde de altså ikke. Jeg er sikker på, at de gerne ville hjælpe hvis det var, men jeg hørte altså hvad de sagde, og de havde INGEN idé om, hvad du talte om. Jeg tror du må finde på noget andet.
+[[Er det...?-&gt;Kat]]</tw-passagedata><tw-passagedata pid="12" name="Hmm2" tags="" position="972,829" size="100,100">Nej, det gjorde de altså ikke. Jeg er sikker på, at de gerne ville hjælpe hvis det var, men jeg hørte altså hvad de sagde, og de havde INGEN idé om, hvad du talte om. Jeg tror du må finde på noget andet.
 
 [[Ja, OK, fair nok, jeg var måske lidt ivrig lige før. Men hvad så? Skal jeg bare tænke mig frem til det hele ved rå tankekraft?-&gt;Tænke1]]
 
-(if: not $løb)[[Hov, jeg glemte noget, jeg kan da bare gå ind i folkemængden og finde dyret. Det burde ikke være så svært.-&gt;Tænke1]]</tw-passagedata><tw-passagedata pid="13" name="Kat" tags="" position="820,1228" size="100,100">En kat?
+(if: not $løb)[[Hov, jeg glemte noget, jeg kan da bare gå ind i folkemængden og finde dyret. Det burde ikke være så svært.-&gt;UndersøgerFolk]]</tw-passagedata><tw-passagedata pid="13" name="Kat" tags="" position="820,1228" size="100,100">En kat?
 
 &lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/cute-cat.jpeg&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;
 
-[[Nej desværre. Katte er sjældent gule. Er det...?-&gt;EnHund]]</tw-passagedata><tw-passagedata pid="14" name="EnHund" tags="" position="819,1378" size="100,100">En nuttet hund? Ak, det var også et godt bud. Men såden en fyr er ikke så hurtig. Hvad så?
+[[Nej desværre. Katte er sjældent gule. Er det...?-&gt;EnHund]]</tw-passagedata><tw-passagedata pid="14" name="EnHund" tags="" position="819,1378" size="100,100">En nuttet hund? 
 
 &lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/cute-dog.avif&quot; width=&quot;600&quot; height=&quot;500&quot;&gt;
 
+Ak, det var også et godt bud. Men såden en fyr er ikke så hurtig. Hvad så?
 
 [[Nej, nu ved jeg det. Selvfølgelig, det giver alt sammen mening nu.-&gt;Hamster]]</tw-passagedata><tw-passagedata pid="15" name="Hamster" tags="" position="819,1527" size="100,100">En dværghamster! Er han fulgt med ned helt fra Århus? 
 
