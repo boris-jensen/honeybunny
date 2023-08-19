@@ -11,42 +11,67 @@
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play PernilleFødselsdagPart2.</tw-noscript></noscript></tw-story>
 <tw-storydata name="PernilleFødselsdagPart2" startnode="1" creator="Twine" creator-version="2.3.15" ifid="6624608F-F281-4616-9ACB-4991B87D15B4" zoom="1" format="Harlowe" format-version="3.2.3" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Bilen" tags="" position="619,350" size="100,100">Mens du går hen mod bilen, kører din hjerne på højtryk. Et spor, et spor, mit kongerige for et spor. Men ak, intet dukker op. I stedet fyldes din hjerne af tanker om de boller med tapenade du fik som snack ved udsigtpunktet. Lækre. Men nogen af dem krummede..... Krummede..... HA, nu har du det. Du ved ikke hvorfor du ikke har set det før. Det er så simpelt. We&#39;re back, baby. Det gule bæst spiste små gule poletter, og de krummede også. Det er bare at følge sporet af krummer på vejen, så finder vi det.
 
-[[Ind i bilen og afsti afsted.-&gt;Bil1]]</tw-passagedata><tw-passagedata pid="2" name="Bil1" tags="" position="620,500" size="100,100">Sydpå går det. Men hvor mon vi ender henne. Foreløbig følger vi bare krummerne på vejen. Men pludselig ser du en seddel i et træ, som du hurtigt snupser i forbifarten. Der står:
+
+&lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/yellow-road.jpg&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;
+
+
+[[Ind i bilen og afsti afsted.-&gt;Bil1]]</tw-passagedata><tw-passagedata pid="2" name="Bil1" tags="" position="618,500" size="100,100">Sydpå går det. Men hvor mon vi ender henne. Foreløbig følger vi bare krummerne på vejen. Men pludselig ser du en seddel i et træ, som du hurtigt snupser i forbifarten. Der står:
 
 &#39;&#39;
 Kære mesterdetektiv. Jeg er beæret over at du kan følge mit spor. Men jeg er selv på flugt. Kan du hjælpe mig? Jeg bor i en by hvor vandet møder landet&#39;&#39;
+
+
+&lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/paper.jpeg&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;
 
 Hvor mon vi skal hen? Dem er der da mange af?
 
 [[Giv mig et spor mere-&gt;Spor1]]
 [[Jeg tror godt jeg kender byen-&gt;KenderByen]]</tw-passagedata><tw-passagedata pid="3" name="Spor1" tags="" position="513,614" size="100,100">Din hjerne tænker så det knager. Det er ikke meget at gå efter. Men hov, hvad er det? Papirstykket har også krummer på sig, og de danner form som en borg på toppen af en bakke midt i en by. Det er virkelig nogen meget delikate og spidsfindige krummer!
 
-[[Ahh, så ved jeg godt hvor vi skal hen-&gt;KenderByen]]</tw-passagedata><tw-passagedata pid="4" name="KenderByen" tags="" position="647,740" size="100,100">(set: $byen to (prompt: &quot;Ok, så skriv byen her, så kan jeg lige checke i mine noter, om jeg også er kommet frem til det rigtige:&quot;, &quot;&quot;))
+[[Ahh, så ved jeg godt hvor vi skal hen-&gt;KenderByen]]</tw-passagedata><tw-passagedata pid="4" name="KenderByen" tags="" position="646,740" size="100,100">(set: $byen to (prompt: &quot;Ok, så skriv byen her, så kan jeg lige checke i mine noter, om jeg også er kommet frem til det rigtige:&quot;, &quot;&quot;))
+
+(if: ($byen is &quot;Kolding&quot;))[
+&lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/kolding.jpeg&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;
+]
 
 (if: ($byen is &quot;Kolding&quot;))[[Mega sejt, jep, det var også Kolding jeg havde i mine noter. Lad os køre derhen-&gt;Kolding]]
 
 (if: not ($byen is &quot;Kolding&quot;))[[Ak, det var ikke den rigtige by. Prøv igen mens jeg leder mine noter igennem-&gt;KenderByen]]</tw-passagedata><tw-passagedata pid="5" name="Kolding" tags="" position="647,887" size="100,100">Det var barnemad for en detektiv som dig at finde byens navn. Men hvor i byen skal vi hen? Mens vi kører og følger krummerne, ser du pludselig endnu et ark papir hængende på et træ, som du hurtigt snapper mens vi kører forbi. Der står:
+
+&lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/paper.jpeg&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;
 
 &#39;&#39;Jeg kan ikke fortælle for meget om, hvor jeg er henne, for ikke at mine forfølgere finder mig. Men jeg kan give et spor, i håbet om, at du, med dine sporingsevner, kan finde mig og hjælpe mig. Jeg har søgt tilflugt i en græsk provins&#39;&#39;
 
 [[Ahaaa, så ved jeg præcis hvor vi skal hen-&gt;KenderStedet]]
 [[Hmm, lad mig lige tænke. Det kan være krummerne danner nye mønstre-&gt;Spor2]]</tw-passagedata><tw-passagedata pid="6" name="KenderStedet" tags="" position="725,1074" size="100,100">(set: $stedet to (prompt: &quot;Ok, så skriv navnet på stedet her, så kan jeg lige checke i mine noter, om jeg også er kommet frem til det rigtige:&quot;, &quot;&quot;))
 
+(if: ($stedet is &quot;Arkaden&quot;))[
+&lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/arkaden.jpeg&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;
+]
+
 (if: ($stedet is &quot;Arkaden&quot;))[[Mega sejt, jep, det var også Arkaden jeg havde i mine noter. Lad os køre derhen-&gt;Arkaden]]
 
-(if: not ($stedet is &quot;Kolding&quot;))[[Ak, det var ikke det rigtige sted. Prøv igen mens jeg leder mine noter igennem-&gt;KenderStedet]]</tw-passagedata><tw-passagedata pid="7" name="Spor2" tags="" position="533,1035" size="100,100">Igen kigger du ned på papiret, og rigtignok, der er flere krummer fra den flygtende gules poletter. Og som du kigger ned på dem, ser de ud til at danse på arket, og danne udsigten fra tilflugtsstedet, hvor man kan se over til en af byens kendte garager.
+(if: not ($stedet is &quot;Arkaden&quot;))[[Ak, det var ikke det rigtige sted. Prøv igen mens jeg leder mine noter igennem-&gt;KenderStedet]]</tw-passagedata><tw-passagedata pid="7" name="Spor2" tags="" position="533,1035" size="100,100">Igen kigger du ned på papiret, og rigtignok, der er flere krummer fra den flygtende gules poletter. Og som du kigger ned på dem, ser de ud til at danse på arket, og danne udsigten fra tilflugtsstedet, hvor man kan se over til en af byens kendte garager.
 
-[[Aha, nu ved jeg hvor vi skal hen. Det er helt tydeligt-&gt;KenderStedet]]</tw-passagedata><tw-passagedata pid="8" name="Arkaden" tags="" position="682,1244" size="100,100">Nu er vi tæt på at have løst gåden. Vi skal til Arkaden i Kolding. Men hvem er det vi skal redde? En gul fyr, som spiser poletter. Hvem kan det dog være?
+[[Aha, nu ved jeg hvor vi skal hen. Det er helt tydeligt-&gt;KenderStedet]]</tw-passagedata><tw-passagedata pid="8" name="Arkaden" tags="" position="682,1243" size="100,100">Nu er vi tæt på at have løst gåden. Vi skal til Arkaden i Kolding. Men hvem er det vi skal redde? En gul fyr, som spiser poletter. Hvem kan det dog være?
 
 [[Aaarh, det er da for nemt, det ved jeg godt-&gt;KenderFyren]]
 
 [[Hmm, det er ikke så nemt endda, lad mig lige tænke på nogen flere spor-&gt;Spor3]]</tw-passagedata><tw-passagedata pid="9" name="KenderFyren" tags="" position="745,1494" size="100,100">(set: $fyren to (prompt: &quot;Ok, så skriv navnet på fyren her, så kan jeg lige checke i mine noter, om jeg også er kommet frem til det rigtige:&quot;, &quot;&quot;))
 
+(if: ($fyren is &quot;Pacman&quot;))[
+&lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/pacman.jpeg&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;
+]
+ 
 (if: ($fyren is &quot;Pacman&quot;))[[Det tror jeg du har ret i. Men jeg er ikke helt sikker-&gt;PacMan]]
 
-(if: not ($fyren is &quot;Pacman&quot;))[[Ak, det var ikke det rigtige sted. Prøv igen mens jeg leder mine noter igennem-&gt;KenderFyren]]</tw-passagedata><tw-passagedata pid="10" name="Spor3" tags="" position="540,1390" size="100,100">Du synker igen dybt ned i tankerne, mens du kigger ud på vejen og krummerne. Med jævne mellemrum kan du også se andet på vejen, noget snask som bare ligger og flyder. Til din gru opdager du, at det er ektoplasma! Spøgelser! Det er dem, den gule fyr flygter fra. Men hvilken gul fyr flygter fra spøgelser og spiser poletter i Arkaden?
+(if: not ($fyren is &quot;Pacman&quot;))[[Ak, det var ikke det rigtige sted. Prøv igen mens jeg leder mine noter igennem-&gt;KenderFyren]]</tw-passagedata><tw-passagedata pid="10" name="Spor3" tags="" position="540,1389" size="100,100">Du synker igen dybt ned i tankerne, mens du kigger ud på vejen og krummerne. Med jævne mellemrum kan du også se andet på vejen, noget snask som bare ligger og flyder. Til din gru opdager du, at det er ektoplasma! Spøgelser! Det er dem, den gule fyr flygter fra. Men hvilken gul fyr flygter fra spøgelser og spiser poletter i Arkaden?
 
-[[Check, jeg ved lige hvem det er-&gt;KenderFyren]]</tw-passagedata><tw-passagedata pid="11" name="PacMan" tags="" position="744,1700" size="100,100">Jeg tror du har ret. Det er nok Pacman. Men bare for at være helt sikker, så kan du måske spørge bartenderen, når vi kommer derhen, om de har Pacman.
+&lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/pacman.jpeg&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;
+
+[[Check, jeg ved lige hvem det er-&gt;KenderFyren]]</tw-passagedata><tw-passagedata pid="11" name="PacMan" tags="" position="743,1700" size="100,100">Jeg tror du har ret. Det er nok Pacman. Men bare for at være helt sikker, så kan du måske spørge bartenderen, når vi kommer derhen, om de har Pacman.
+
+&lt;img src=&quot;https://honeybunnygames.neocities.org/stories/pernille-bday1/bartender.webp&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;
 
 Snip snap snude, nu er sidste del ude.</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,a=!1,i=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){a=!0,i=e}finally{try{!r&&s.return&&s.return()}finally{if(a)throw i}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
