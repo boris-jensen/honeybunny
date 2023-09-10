@@ -38,8 +38,8 @@ function runBoids() {
   const canvas = document.getElementById('main-canvas')
   const width = canvas.width = window.innerWidth
   const height = canvas.height = window.innerHeight
-  const flock = new Flock(100, width, height)
-
+  const boids = randomBoids(400, width, height)
+  const flock = new Flock(boids, width, height)
   const ctx = canvas.getContext('2d')
   timestep = timestepWithData(flock, width, height, ctx)
   window.requestAnimationFrame(timestep);

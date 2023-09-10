@@ -1,13 +1,13 @@
-const LOCAL_RADIUS = 150
-const CLOSE_RANGE_LOCAL = LOCAL_RADIUS * 0.8
+const LOCAL_RADIUS = 50
+const CLOSE_RANGE_LOCAL = LOCAL_RADIUS * 0.5
 const BORDER_REPULSION_WIDTH = 50
-const PUSH_FORCE = 100009
-const AVG_VELOCITY_ACCELERATION_SCALE = 0.01
-const LOCAL_CENTER_MASS_SCALE = 0.2
+const PUSH_FORCE = 10
+const AVG_VELOCITY_ACCELERATION_SCALE = 0.005
+const LOCAL_CENTER_MASS_SCALE = 0.0001
 
 class Flock {
-  constructor(count, width, height) {
-    this.boids = Array.from(Array(count).keys()).map(index => randomBoid(width, height, index))
+  constructor(boids, width, height) {
+    this.boids = boids
     this.width = width
     this.height = height
     this.center = new Vector(width / 2, height / 2)
@@ -21,17 +21,15 @@ class Flock {
 
   updateVelocity(boid, localTable, initialVelocities) {
     const localBoids = this.localBoidsForBoid(boid, localTable)
-    const borderAcc = this.accelerationFromBorders(boid)
-    const avgVelocityAcc = this.accelerationFromAvgVelocity(boid, localBoids, initialVelocities)
-    const localPushAcc = this.accelerationFromAvoidance(boid, localBoids)
-    const localPullAcc = this.accelerationFromLocalPull(boid, localBoids)
-    const centerPullAcc = this.accelerationFromCenterPull(boid)
-    const totalAcc = borderAcc
-      .add(avgVelocityAcc)
-      .add(localPushAcc)
-      .add(localPullAcc)
-      .add(centerPullAcc)
-    boid.accelerate(totalAcc)
+    const accelerations = 
+      [ emptyVector()
+      , this.accelerationFromBorders(boid)
+      , this.accelerationFromAvgVelocity(boid, localBoids, initialVelocities)
+      , this.accelerationFromAvoidance(boid, localBoids)
+      , this.accelerationFromLocalPull(boid, localBoids)
+      ]
+    const totalAcceleration = accelerations.reduce((total, elem) => total.add(elem), emptyVector())
+    boid.accelerate(totalAcceleration)
   }
 
   updatePositions() {
@@ -46,16 +44,20 @@ class Flock {
         .map(local => initialVelocities[local.index])
         .reduce((acc, elem) => acc.add(elem), emptyVector())
         .scale(1 / localBoids.length)
+      
+      const avgVelocityAcc = avgVelocity.subtract(boid.velocity).scale(AVG_VELOCITY_ACCELERATION_SCALE)
 
-      return avgVelocity.subtract(boid.velocity).scale(AVG_VELOCITY_ACCELERATION_SCALE)
+      return avgVelocityAcc
     }
   }
 
   accelerationFromAvoidance(boid, localBoids) {
-    return localBoids
+    const avoidanceAcc = localBoids
       .map(local => this.pushFrom(boid, local))
       .reduce((acc, elem) => acc.add(elem), emptyVector())
       .scale(PUSH_FORCE)
+
+    return avoidanceAcc
   }
 
   accelerationFromBorders(boid) {
@@ -81,13 +83,10 @@ class Flock {
         .map(local => local.position)
         .reduce((acc, elem) => acc.add(elem), emptyVector())
         .scale(1 / localBoids.length)
-
-      return localCenterMass.subtract(boid.position).scale(LOCAL_CENTER_MASS_SCALE)
+      
+      const localPull = localCenterMass.subtract(boid.position).scale(LOCAL_CENTER_MASS_SCALE)
+      return localPull
     }
-  }
-
-  accelerationFromCenterPull(boid) {
-    return this.center.subtract(boid.position)  
   }
 
   pushFrom(boid, other) {
@@ -128,8 +127,25 @@ class Flock {
   }
 
   isLocalBoidPair(boid1, boid2) {
-    boid1.position
+    const isLocalPair =  boid1.position
       .subtract(boid2.position)
       .isSmallerThan(LOCAL_RADIUS)
+
+    return isLocalPair
   }
+}
+
+function randomBoids(count, width, height) {
+  return Array
+    .from(Array(count).keys())
+    .map(index => randomBoid(width, height, index))
+}
+
+function testBoids() {
+  const boids =
+    [ new Boid(new Vector(100, 100), new Vector(1, 0), 0)
+    , new Boid(new Vector(100, 130), new Vector(1, 0), 1)
+    ]
+
+  return boids
 }

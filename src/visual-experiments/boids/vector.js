@@ -31,6 +31,10 @@ class Vector {
     // Argument order goes y then x. Extended version of Math.atan, which takes y/x for the tangent
     return Math.atan2(this.y, this.x)
   }
+
+  isSmallerThan(length) {
+    return this.x * this.x + this.y * this.y < length * length
+  }
 }
 
 function emptyVector() {
