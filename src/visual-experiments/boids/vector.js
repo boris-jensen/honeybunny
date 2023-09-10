@@ -20,8 +20,11 @@ class Vector {
     return Math.sqrt(this.x * this.x + this.y * this.y)
   }
 
-  normalize() {
-    return this.scale(1 / this.length)
+  withMaxLength(maxLength) {
+    const length = this.length()
+    return length > maxLength
+      ? this.scale(maxLength / length)
+      : this
   }
 
   angle() {
