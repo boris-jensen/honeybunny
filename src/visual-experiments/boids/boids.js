@@ -1,12 +1,13 @@
 const BOID_SCALE = 10
 const HALF_BOID_SCALE = BOID_SCALE / 2
+const THIRD_OF_CIRCLE = TAU / 3
 
 function paintBoid(boid, ctx) {
   const initial = boid.position
   const direction = boid.velocity.angle()
-  const tip = initial.add(vectorFromPolar(BOID_SCALE, direction))
-  const left = initial.add(vectorFromPolar(HALF_BOID_SCALE, direction + TAU / 3))
-  const right = initial.add(vectorFromPolar(HALF_BOID_SCALE, direction - TAU / 3))
+  const tip = initial.add(Vector.fromPolar(BOID_SCALE, direction))
+  const left = initial.add(Vector.fromPolar(HALF_BOID_SCALE, direction + THIRD_OF_CIRCLE))
+  const right = initial.add(Vector.fromPolar(HALF_BOID_SCALE, direction - THIRD_OF_CIRCLE))
 
   ctx.beginPath()
   ctx.moveTo(initial.x, initial.y)
@@ -38,8 +39,7 @@ function runBoids() {
   const canvas = document.getElementById('main-canvas')
   const width = canvas.width = window.innerWidth
   const height = canvas.height = window.innerHeight
-  const boids = randomBoids(400, width, height)
-  const flock = new Flock(boids, width, height)
+  const flock = Flock.random(400, width, height)
   const ctx = canvas.getContext('2d')
   timestep = timestepWithData(flock, width, height, ctx)
   window.requestAnimationFrame(timestep);

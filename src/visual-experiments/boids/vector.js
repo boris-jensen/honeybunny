@@ -17,7 +17,19 @@ class Vector {
   }
 
   length() {
-    return Math.sqrt(this.x * this.x + this.y * this.y)
+    return Math.sqrt(this.squareLength())
+  }
+
+  squareLength() {
+    return this.x * this.x + this.y * this.y
+  }
+
+  asUnitVector() {
+    return this.scale(1/this.length())
+  }
+
+  setLength(newLength) {
+    return this.asUnitVector().scale(newLength)
   }
 
   withMaxLength(maxLength) {
@@ -35,14 +47,23 @@ class Vector {
   isSmallerThan(length) {
     return this.x * this.x + this.y * this.y < length * length
   }
-}
 
-function emptyVector() {
-  return new Vector(0, 0)
-}
+  static zero = new Vector(0, 0)
 
-function vectorFromPolar(length, direction) {
-  const x = Math.cos(direction) * length
-  const y = Math.sin(direction) * length
-  return new Vector(x, y)
+  static randomDirection() {
+    const direction = Math.random() * TAU
+    return new Vector(Math.cos(direction), Math.sin(direction))
+  }
+
+  static randomPosition(width, height) {
+    const positionX = Math.random() * width
+    const positionY = Math.random() * height
+    return new Vector(positionX, positionY)
+  }
+
+  static fromPolar(length, direction) {
+    const x = Math.cos(direction) * length
+    const y = Math.sin(direction) * length
+    return new Vector(x, y)
+  }
 }

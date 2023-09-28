@@ -1,10 +1,3 @@
-const LOCAL_RADIUS = 50
-const CLOSE_RANGE_LOCAL = LOCAL_RADIUS * 0.5
-const BORDER_REPULSION_WIDTH = 50
-const PUSH_FORCE = 10
-const AVG_VELOCITY_ACCELERATION_SCALE = 0.005
-const LOCAL_CENTER_MASS_SCALE = 0.0001
-
 class Flock {
   constructor(boids, width, height) {
     this.boids = boids
@@ -14,35 +7,35 @@ class Flock {
   }
 
   updateVelocities() {
-    const localTable = this.makeLocalBoidsTable()
-    const initialVelocities = this.boids.map(boid => boid.velocity)
-    this.boids.forEach(boid => this.updateVelocity(boid, localTable, initialVelocities))
-  }
-
-  updateVelocity(boid, localTable, initialVelocities) {
-    const localBoids = this.localBoidsForBoid(boid, localTable)
-    const accelerations = 
-      [ emptyVector()
-      , this.accelerationFromBorders(boid)
-      , this.accelerationFromAvgVelocity(boid, localBoids, initialVelocities)
-      , this.accelerationFromAvoidance(boid, localBoids)
-      , this.accelerationFromLocalPull(boid, localBoids)
-      ]
-    const totalAcceleration = accelerations.reduce((total, elem) => total.add(elem), emptyVector())
-    boid.accelerate(totalAcceleration)
+    const localBoidsTable = new LocalBoidsTable(this.boids)
+    const forces = this.boids.map(boid => this.forcesForBoid(boid, this.boids, localBoidsTable))
+    this.boids.forEach(boid => boid.accelerate(forces[boid.index]))
   }
 
   updatePositions() {
     this.boids.forEach(boid => boid.move())
   }
 
-  accelerationFromAvgVelocity(boid, localBoids, initialVelocities) {
+  forcesForBoid(boid, boids, localBoidsTable) {
+    const localBoids = localBoidsTable.localBoidsForBoid(boid, boids)
+    const avoidanceBoids = localBoidsTable.avoidanceBoidsForBoid(boid, boids)
+    const accelerations =
+      [ Vector.zero
+      , this.borderForce(boid)
+      , this.alignmentForce(boid, localBoids)
+      , this.cohesionForce(boid, localBoids)
+      , this.avoidanceForce(boid, avoidanceBoids)
+      ]
+    return accelerations.reduce((total, elem) => total.add(elem), Vector.zero)
+  }
+
+  alignmentForce(boid, localBoids) {
     if (localBoids.length == 0) {
-      return emptyVector()
+      return Vector.zero
     } else {
       const avgVelocity = localBoids
-        .map(local => initialVelocities[local.index])
-        .reduce((acc, elem) => acc.add(elem), emptyVector())
+        .map(local => local.velocity)
+        .reduce((acc, elem) => acc.add(elem), Vector.zero)
         .scale(1 / localBoids.length)
       
       const avgVelocityAcc = avgVelocity.subtract(boid.velocity).scale(AVG_VELOCITY_ACCELERATION_SCALE)
@@ -51,16 +44,15 @@ class Flock {
     }
   }
 
-  accelerationFromAvoidance(boid, localBoids) {
-    const avoidanceAcc = localBoids
-      .map(local => this.pushFrom(boid, local))
-      .reduce((acc, elem) => acc.add(elem), emptyVector())
-      .scale(PUSH_FORCE)
+  avoidanceForce(boid, avoidanceBoids) {
+    const avoidanceAcc = avoidanceBoids
+      .map(local => this.avoidanceForceDueToOtherBoid(boid, local))
+      .reduce((acc, elem) => acc.add(elem), Vector.zero)
 
     return avoidanceAcc
   }
 
-  accelerationFromBorders(boid) {
+  borderForce(boid) {
     const x = boid.position.x
     const y = boid.position.y
 
@@ -72,16 +64,16 @@ class Flock {
     const accX = accXLow + accXHigh
     const accY = accYLow + accYHigh
 
-    return new Vector(accX, accY)
+    return new Vector(accX, accY).scale(BORDER_REPULSION_STRENGTH)
   }
 
-  accelerationFromLocalPull(boid, localBoids) {
+  cohesionForce(boid, localBoids) {
     if (localBoids.length == 0) {
-      return emptyVector()
+      return Vector.zero
     } else {
       const localCenterMass = localBoids
         .map(local => local.position)
-        .reduce((acc, elem) => acc.add(elem), emptyVector())
+        .reduce((acc, elem) => acc.add(elem), Vector.zero)
         .scale(1 / localBoids.length)
       
       const localPull = localCenterMass.subtract(boid.position).scale(LOCAL_CENTER_MASS_SCALE)
@@ -89,63 +81,29 @@ class Flock {
     }
   }
 
-  pushFrom(boid, other) {
-    const directionToBoid = boid.position.subtract(other.position)
-    const length = directionToBoid.length()
-    if (length < CLOSE_RANGE_LOCAL) {
-      if (length == 0) {
-        return emptyVector()
-      } else {
-        const normalized = directionToBoid.scale(1 / length)
-        const force = 1 / (length * length)
-        return normalized.scale(force)
-      }
-    } else {
-      return emptyVector()
-    }
+  // Avoid another boid by applying a force in the opposite direction than the vector from boid to otherBoid.
+  // If the boids are close, we want to apply a larger force than if they are far apart. Therefore we divide the
+  // opposite vector with the its own length twice (i.e. divide by the square length). The first time is to get the unit
+  // direction vector, and the second time to actually get the inverse proportionality.
+  avoidanceForceDueToOtherBoid(boid, otherBoid) {
+    const directionAwayFromBoid = boid.position.subtract(otherBoid.position)
+    const inverseProportionalForce = directionAwayFromBoid.scale(1 / directionAwayFromBoid.squareLength())
+    return inverseProportionalForce
   }
 
-  localBoidsForBoid(boid, localBoidTable) {
-    return this.boids.filter(otherBoid => {
-      if (boid.index == otherBoid.index) {
-        return false
-      } else if (boid.index > otherBoid.index) {
-        return localBoidTable[boid.index][otherBoid.index]
-      } else {
-        return localBoidTable[otherBoid.index][boid.index]
-      }
-    })
+  static random(count, width, height) {
+    const boids = range(count)
+      .map(index => Boid.random(width, height, index))
+
+    return new Flock(boids, width, height)
   }
 
-  // Triangular table, since the relation is symmetric. A boid is never local to itself
-  makeLocalBoidsTable() {
-    return this.boids.map(boid => 
-      Array.from(Array(boid.index)).map((_, index) =>
-        this.isLocalBoidPair(boid, this.boids[index])
-      )
-    )
+  static test(width, height) {
+    const boids =
+      [ new Boid(new Vector(100, 100), new Vector(1, 0), 0)
+      , new Boid(new Vector(100, 130), new Vector(1, 0), 1)
+      ]
+
+    return new Flock(boids, width, height)
   }
-
-  isLocalBoidPair(boid1, boid2) {
-    const isLocalPair =  boid1.position
-      .subtract(boid2.position)
-      .isSmallerThan(LOCAL_RADIUS)
-
-    return isLocalPair
-  }
-}
-
-function randomBoids(count, width, height) {
-  return Array
-    .from(Array(count).keys())
-    .map(index => randomBoid(width, height, index))
-}
-
-function testBoids() {
-  const boids =
-    [ new Boid(new Vector(100, 100), new Vector(1, 0), 0)
-    , new Boid(new Vector(100, 130), new Vector(1, 0), 1)
-    ]
-
-  return boids
 }
