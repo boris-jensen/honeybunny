@@ -3,7 +3,6 @@ class Flock {
     this.boids = boids
     this.width = width
     this.height = height
-    this.center = new Vector(width / 2, height / 2)
   }
 
   updateVelocities() {
@@ -13,7 +12,7 @@ class Flock {
   }
 
   updatePositions() {
-    this.boids.forEach(boid => boid.move())
+    this.boids.forEach(boid => boid.move(this.width, this.height))
   }
 
   forcesForBoid(boid, boids, localBoidsTable) {
@@ -25,6 +24,7 @@ class Flock {
       , this.alignmentForce(boid, localBoids)
       , this.cohesionForce(boid, localBoids)
       , this.avoidanceForce(boid, avoidanceBoids)
+      , this.boidAccelerationForce(boid)
       ]
     return accelerations.reduce((total, elem) => total.add(elem), Vector.zero)
   }
@@ -37,19 +37,17 @@ class Flock {
         .map(local => local.velocity)
         .reduce((acc, elem) => acc.add(elem), Vector.zero)
         .scale(1 / localBoids.length)
-      
-      const avgVelocityAcc = avgVelocity.subtract(boid.velocity).scale(AVG_VELOCITY_ACCELERATION_SCALE)
 
-      return avgVelocityAcc
+      return avgVelocity.subtract(boid.velocity).scale(ALIGNMENT_FORCE_SCALE)
     }
   }
 
-  avoidanceForce(boid, avoidanceBoids) {
-    const avoidanceAcc = avoidanceBoids
-      .map(local => this.avoidanceForceDueToOtherBoid(boid, local))
-      .reduce((acc, elem) => acc.add(elem), Vector.zero)
-
-    return avoidanceAcc
+  /**
+   * If we don't add an acceleration force, then the boids will eventually align on the global average velocity, which is 0.
+   * So this keeps them in motion
+   */
+  boidAccelerationForce(boid) {
+    return boid.velocity.scale(BOID_ACCELERATION_FORCE_SCALE)
   }
 
   borderForce(boid) {
@@ -64,7 +62,7 @@ class Flock {
     const accX = accXLow + accXHigh
     const accY = accYLow + accYHigh
 
-    return new Vector(accX, accY).scale(BORDER_REPULSION_STRENGTH)
+    return new Vector(accX, accY).scale(BORDER_FORCE_SCALE)
   }
 
   cohesionForce(boid, localBoids) {
@@ -76,9 +74,16 @@ class Flock {
         .reduce((acc, elem) => acc.add(elem), Vector.zero)
         .scale(1 / localBoids.length)
       
-      const localPull = localCenterMass.subtract(boid.position).scale(LOCAL_CENTER_MASS_SCALE)
-      return localPull
+      return localCenterMass.subtract(boid.position).scale(COHESION_FORCE_SCALE)
     }
+  }
+
+  avoidanceForce(boid, avoidanceBoids) {
+    const avoidanceAcc = avoidanceBoids
+      .map(local => this.avoidanceForceDueToOtherBoid(boid, local))
+      .reduce((acc, elem) => acc.add(elem), Vector.zero)
+
+    return avoidanceAcc.scale(AVOIDANCE_FORCE_SCALE)
   }
 
   // Avoid another boid by applying a force in the opposite direction than the vector from boid to otherBoid.
