@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>title</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="utils/mathUtils.js"></script>
     <script src="utils/arrayUtils.js"></script>
     <script src="parameters.js"></script>
@@ -13,8 +14,51 @@
     <script src="boids.js"></script>
   </head>
   <body onload="runBoids()">
-    <div class="">
-      <div class="">
+    <div class="flex flex-row">
+      <div class="flex-1 m-2">
+        <div class="flex flex-col ">
+          <div>
+            <label for="cohesion-scale-range">Cohesion: <span id="cohesion-scale-value"></span></label>
+            <input type="range" id="cohesion-scale-range" />
+          </div>
+          <div>
+            <label for="alignment-scale-range">Alignment: <span id="alignment-scale-value"></span></label>
+            <input type="range" id="alignment-scale-range" />
+          </div>
+          <div>
+            <label for="avoidance-scale-range">Avoidance: <span id="avoidance-scale-value"></span></label>
+            <input type="range" id="avoidance-scale-range" />
+          </div>
+          <div>
+            <label for="local-radius-range">Local radius: <span id="local-radius-value"></span></label>
+            <input type="range" id="local-radius-range" />
+          </div>
+          <div>
+            <label for="avoidance-radius-ratio-range">Avoidance radius ratio: <span id="avoidance-radius-ratio-value"></span></label>
+            <input type="range" id="avoidance-radius-ratio-range" />
+          </div>
+          <div>
+            <label for="max-speed-range">Max speed: <span id="max-speed-value"></span></label>
+            <input type="range" id="max-speed-range" />
+          </div>
+          <div>
+            <label for="boid-acceleration-range">Boid acceleration: <span id="boid-acceleration-value"></span></label>
+            <input type="range" id="boid-acceleration-range" />
+          </div>
+          <div>
+            <label for="use-borders-checkbox">Use borders:</label>
+            <input type="checkbox" id="use-borders-checkbox"/>
+          </div>
+          <div>
+            <h3>Pointer action:</h3>
+            <input type="radio" id="attract-radio" name="pointer-action" value="attract">
+            <label for="html">Attract</label>
+            <input type="radio" id="repel-radio" name="pointer-action" value="repel">
+            <label for="css">Repel</label>
+          </div>
+        </div>
+      </div>
+      <div class="flex-initial m-2">
         <canvas id="main-canvas"></canvas>
       </div>
     </div>

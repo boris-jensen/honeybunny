@@ -5,10 +5,10 @@ class Boid {
     this.index = index
   }
 
-  accelerate(force) {
+  accelerate(force, params) {
     // shortcut by setting mass to 1, in F=ma
     const acceleration = force
-    this.velocity = this.velocity.add(acceleration).withMaxLength(BOID_MAX_SPEED)
+    this.velocity = this.velocity.add(acceleration).withMaxLength(params.maxSpeed)
   }
 
   move(width, height) {
@@ -27,10 +27,10 @@ class Boid {
     }
   }
 
-  static random(width, height, index) {
+  static random(width, height, index, params) {
     return new Boid(
       Vector.randomPosition(width, height),
-      Vector.randomDirection().scale(Math.random() * BOID_MAX_SPEED),
+      Vector.randomDirection().scale(Math.random() * params.maxSpeed),
       index,
     )
   }

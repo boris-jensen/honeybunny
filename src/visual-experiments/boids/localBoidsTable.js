@@ -1,9 +1,10 @@
 class LocalBoidsTable {
 
-  constructor(boids) {
-    const avoidanceRadius = LOCAL_RADIUS * AVOIDANCE_RADIUS_RATIO
+  constructor(boids, params) {
+    const localRadius = params.localRadius
+    const avoidanceRadius = localRadius * params.avoidanceRadiusRatio
     const squareDistanceTable = this.makeSquareDistanceTable(boids)
-    this.isLocalBoidTable = this.makeSquareDistanceIsLessThan(LOCAL_RADIUS * LOCAL_RADIUS, squareDistanceTable)
+    this.isLocalBoidTable = this.makeSquareDistanceIsLessThan(localRadius * localRadius, squareDistanceTable)
     this.isAvoidanceBoidTable = this.makeSquareDistanceIsLessThan(avoidanceRadius * avoidanceRadius, squareDistanceTable)
   }
 
