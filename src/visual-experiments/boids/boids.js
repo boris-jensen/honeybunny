@@ -65,14 +65,10 @@ function hookupTouchEvents(canvas, params) {
   canvas.ontouchcancel = function() { params.mouseDown = false; params.pointerPosition = null }
   canvas.ontouchmove = function(event) { 
     if (params.mouseDown && event.targetTouches.length > 0) {
-      primaryTouch = event.targetTouches[0]
-      params.pointerPosition = new Vector(primaryTouch.offsetX, primaryTouch.offsetY)
+//      primaryTouch = event.targetTouches[0]
+//      params.pointerPosition = new Vector(primaryTouch.offsetX, primaryTouch.offsetY)
     }
   }
-}
-
-function handleTouchAndDrag(params, canvas) {
-
 }
 
 function hookupParams(params) {
