@@ -37,8 +37,5 @@ function setRangeByElementPrefix(prefix, percentage, params) {
     case "max-speed":
       params.maxSpeed = percentage * 6
       break
-    case "boid-acceleration":
-      params.boidAccelerationForceScale = percentage * 0.02
-      break
   } 
 }

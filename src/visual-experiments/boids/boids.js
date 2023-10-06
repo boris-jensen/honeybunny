@@ -80,9 +80,7 @@ function hookupParams(params) {
   hookupRange("avoidance-scale", params, 50)
   hookupRange("alignment-scale", params, 50)
   hookupRange("local-radius", params, 50)
-  hookupRange("avoidance-radius-ratio", params, 80)
   hookupRange("max-speed", params, 50)
-  hookupRange("boid-acceleration", params, 50)
   hookupBorders(params)
   hookupPointerBehavior(params)
 }
