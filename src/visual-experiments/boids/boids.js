@@ -41,6 +41,7 @@ function runBoids() {
   const height = canvas.height = window.innerHeight
   const params = initialParameters()
   hookupPointerEvents(canvas, params)
+  hookupTouchEvents(canvas, params)
   hookupParams(params)
   const flock = Flock.random(400, width, height, params)
   const ctx = canvas.getContext('2d')
@@ -49,20 +50,29 @@ function runBoids() {
 }
 
 function hookupPointerEvents(canvas, params) {
-  canvas.onmousedown = function(event) { params.mouseDown = true; handleMouseClickAndDrag(event)}
+  canvas.onmousedown = function() { params.mouseDown = true; }
   canvas.onmouseup = function() { params.mouseDown = false; params.pointerPosition = null }
-  canvas.onmousemove = handleMouseClickAndDrag(params, canvas)
-}
-
-function handleMouseClickAndDrag(params, canvas) {
-  return event => {
+  canvas.onmousemove = function(event) {
     if (params.mouseDown) {
-      const rect = canvas.getBoundingClientRect()
-      const eventX = event.clientX - rect.left
-      const eventY = event.clientY - rect.top
-      params.pointerPosition = new Vector(eventX, eventY)
+      params.pointerPosition = new Vector(event.offsetX, event.offsetY)
     }
   }
+}
+
+function hookupTouchEvents(canvas, params) {
+  canvas.ontouchstart = function() { params.mouseDown = true; }
+  canvas.ontouchend = function() { params.mouseDown = false; params.pointerPosition = null }
+  canvas.ontouchcancel = function() { params.mouseDown = false; params.pointerPosition = null }
+  canvas.ontouchmove = function(event) { 
+    if (params.mouseDown && event.targetTouches.length > 0) {
+      primaryTouch = event.targetTouches[0]
+      params.pointerPosition = new Vector(primaryTouch.offsetX, primaryTouch.offsetY)
+    }
+  }
+}
+
+function handleTouchAndDrag(params, canvas) {
+
 }
 
 function hookupParams(params) {
