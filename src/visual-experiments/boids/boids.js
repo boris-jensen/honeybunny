@@ -66,7 +66,7 @@ function hookupTouchEvents(canvas, params) {
   canvas.ontouchmove = function(event) { 
     if (params.mouseDown && event.targetTouches.length > 0) {
       primaryTouch = event.targetTouches[0]
-//      params.pointerPosition = new Vector(primaryTouch.offsetX, primaryTouch.offsetY)
+      params.pointerPosition = new Vector(primaryTouch.clientX, primaryTouch.clientY)
     }
   }
 }
