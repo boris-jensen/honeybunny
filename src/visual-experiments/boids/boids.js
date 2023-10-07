@@ -55,6 +55,10 @@ function hookupPointerEvents(canvas, params) {
   canvas.onmousemove = function(event) {
     event.preventDefault()
     if (params.mouseDown) {  
+      const valueElement = document.getElementById("log")
+
+      valueElement.innerHTML = event.offsetX
+
       params.pointerPosition = new Vector(event.offsetX, event.offsetY)
     }
   }
