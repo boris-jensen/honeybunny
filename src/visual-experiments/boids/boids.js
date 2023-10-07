@@ -55,16 +55,15 @@ function hookupPointerEvents(canvas, params) {
   canvas.onmousemove = function(event) {
     event.preventDefault()
     if (params.mouseDown) {  
-      const valueElement = document.getElementById("log")
-
-      valueElement.innerHTML = event.offsetX
-
       params.pointerPosition = new Vector(event.offsetX, event.offsetY)
     }
   }
 }
 
 function hookupTouchEvents(canvas, params) {
+  const offsetX = canvas.getBoundingClientRect().left
+  const offsetY = canvas.getBoundingClientRect().top
+
   canvas.ontouchstart = function() { params.mouseDown = true; }
   canvas.ontouchend = function() { params.mouseDown = false; params.pointerPosition = null }
   canvas.ontouchcancel = function() { params.mouseDown = false; params.pointerPosition = null }
@@ -72,11 +71,7 @@ function hookupTouchEvents(canvas, params) {
     event.preventDefault()
     if (params.mouseDown && event.targetTouches.length > 0) {
       primaryTouch = event.targetTouches[0]
-      const valueElement = document.getElementById("log")
-
-      valueElement.innerHTML = primaryTouch.clientX
-
-      params.pointerPosition = new Vector(primaryTouch.clientX, primaryTouch.clientY)
+      params.pointerPosition = new Vector(primaryTouch.clientX - offsetX, primaryTouch.clientY - offsetY)
     }
   }
 }
