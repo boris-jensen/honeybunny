@@ -53,7 +53,8 @@ function hookupPointerEvents(canvas, params) {
   canvas.onmousedown = function() { params.mouseDown = true; }
   canvas.onmouseup = function() { params.mouseDown = false; params.pointerPosition = null }
   canvas.onmousemove = function(event) {
-    if (params.mouseDown) {
+    event.preventDefault()
+    if (params.mouseDown) {  
       params.pointerPosition = new Vector(event.offsetX, event.offsetY)
     }
   }
@@ -64,8 +65,13 @@ function hookupTouchEvents(canvas, params) {
   canvas.ontouchend = function() { params.mouseDown = false; params.pointerPosition = null }
   canvas.ontouchcancel = function() { params.mouseDown = false; params.pointerPosition = null }
   canvas.ontouchmove = function(event) { 
+    event.preventDefault()
     if (params.mouseDown && event.targetTouches.length > 0) {
       primaryTouch = event.targetTouches[0]
+      const valueElement = document.getElementById("log")
+
+      valueElement.innerHTML = primaryTouch.clientX
+
       params.pointerPosition = new Vector(primaryTouch.clientX, primaryTouch.clientY)
     }
   }
